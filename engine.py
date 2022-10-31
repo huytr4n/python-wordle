@@ -3,11 +3,13 @@ import sys
 from typing import List, Any, Optional
 from utils import get_random_word
 
+import enchant
 from termcolor import colored
 
 
 # Debug mode.
 DEBUG = os.getenv("DEBUG", False) == "True"
+dictionary = enchant.Dict("en_US")
 
 
 class Wordle:
@@ -40,7 +42,8 @@ class Wordle:
     def start(self) -> None:
         print("Welcome to the game of Wordle!")
         print(
-            f"You have {self.maximum_guesses} chances to guess a {self.word_length} letter word."
+            f"You have {self.maximum_guesses} chances "
+            "to guess a {self.word_length} letter word."
         )
 
         while self.number_of_guesses <= self.maximum_guesses:
@@ -48,6 +51,8 @@ class Wordle:
 
             if len(word) != self.word_length:
                 print(f"Word must be {self.word_length} characters long")
+            elif not self.is_valid_word(word):
+                print(f"{word} is not a valid word")
             else:
                 self.number_of_guesses += 1
 
@@ -59,7 +64,13 @@ class Wordle:
                     self.play_again()
 
         print("You lost!")
+        print(f"The word is: {self.the_word.upper()}")
         self.play_again()
+
+    def is_valid_word(self, word: str) -> bool:
+        if dictionary.check(word):
+            return True
+        return False
 
     def play_again(self) -> None:
         if self.is_play_again():

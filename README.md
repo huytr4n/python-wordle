@@ -8,6 +8,8 @@ Guess the Wordle in 6 tries. Each guess must be a valid 5-letter word. The color
 
 You with need Python 3.9 or later installed before you can run the game.
 
+Install [enchant](https://pyenchant.github.io/pyenchant/install.html)
+
 You will also need to install the `requests` module to update the word list but you can skip it if you just want to play only.
 
 ## How to play
@@ -41,3 +43,8 @@ This is a minimal version of the game, there are a few of cases need to be cover
 - Verify the valid word from user's input.
 - Configuration to play with different settings of guess word (6-7 letters) and number of guesses.
 - a UI version with Tkinter.
+
+## Updates
+
+- Added [Enchant](https://pyenchant.github.io/pyenchant/index.html) module to check valid English word.
+- Show the right word after user loses.
